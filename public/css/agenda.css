@@ -1,0 +1,27 @@
+/* Agenda del dueño con la estética de New Style. */
+.agenda { max-width: 900px; margin: 0 auto; padding: 10px clamp(16px, 4vw, 40px) 60px; }
+.ag-login { max-width: 420px; display: grid; gap: 14px; background: var(--paper); border-radius: 24px; padding: 28px; }
+.ag-title { font: 800 34px/1.05 var(--display); letter-spacing: -.035em; }
+.ag-sub { color: var(--pine-soft); }
+.ag-field { display: grid; gap: 6px; font-weight: 700; }
+.ag-field input { font: inherit; padding: 12px; border: 2px solid var(--mint-deep); border-radius: 14px; min-height: 48px; }
+.ag-error { background: #ffe2ea; color: #8c1636; border-radius: 14px; padding: 10px 12px; }
+.ag-error[hidden] { display: none; }
+.ag-button { font: inherit; font-weight: 700; padding: 9px 16px; min-height: 44px; border: 0; background: var(--mint-deep); color: var(--pine); border-radius: 14px; }
+.ag-primary { background: var(--pine); color: var(--mint); }
+.ag-danger { background: var(--pink); color: var(--paper); }
+.ag-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
+.ag-tools { display: flex; gap: 8px; flex-wrap: wrap; }
+.ag-day h2 { font: 700 20px/1.1 var(--display); letter-spacing: -.02em; margin: 26px 0 10px; }
+.ag-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ag-item { display: grid; grid-template-columns: 90px 1fr auto; gap: 6px 14px; padding: 14px 16px; background: var(--paper); border-radius: 16px; align-items: center; }
+.ag-time { font: 700 18px/1 var(--display); background: var(--screen); color: var(--led); border-radius: 10px; padding: 9px 0; text-align: center; }
+.ag-who { display: flex; flex-direction: column; }
+.ag-who span, .ag-what { color: var(--pine-soft); font-size: 15px; }
+.ag-what { grid-column: 2; }
+.ag-status { font-weight: 700; }
+.ag-pending .ag-status { color: var(--pink-deep); }
+.ag-cancelled, .ag-expired { opacity: .55; }
+.ag-actions { grid-column: 2 / -1; display: flex; gap: 8px; flex-wrap: wrap; }
+.ag-empty { color: var(--pine-soft); padding: 24px 0; }
+@media (max-width: 520px) { .ag-item { grid-template-columns: 74px 1fr; } .ag-status { grid-column: 2; } }

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#e3f3ec">
+  <meta name="description" content="New Style: fade, diseño y color. Sacá número online y llegá a tu hora.">
+  <title>New Style · Sacá número</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Onest:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/reservas-core.js" defer></script>
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="top">
+  <a class="brand" href="#" aria-label="New Style, inicio"><span class="brand-dot" aria-hidden="true"></span><span data-site-name>New Style</span></a>
+  <nav aria-label="Secciones"><a href="#servicios">Servicios</a><a href="#equipo">Equipo</a><a href="#horarios">Horarios</a></nav>
+  <button class="btn btn-pink" type="button" data-book>Sacar número</button>
+</header>
+
+<main id="contenido">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <h1 id="hero-title">Sacá número.</h1>
+      <p>Fade, diseño y color. Elegís el horario desde el celu y llegás justo a tu turno: acá nadie espera parado.</p>
+      <button class="btn btn-pink btn-big" type="button" data-book>Sacar número</button>
+    </div>
+    <div class="turnero">
+      <div class="turnero-body">
+        <p class="turnero-label" id="turnero-label">Próximo libre</p>
+        <div class="display" role="img" aria-labelledby="turnero-label turnero-reading" data-display>
+          <svg class="digits" viewBox="0 0 250 100" aria-hidden="true" data-digits></svg>
+        </div>
+        <p class="turnero-day" id="turnero-reading" data-turnero-day aria-live="polite">Buscando…</p>
+        <span class="turnero-slot" aria-hidden="true"></span>
+      </div>
+      <button class="ticket-out" type="button" data-book aria-label="Sacar número para el próximo horario libre"><span>Tu número</span><strong data-ticket-time>--:--</strong></button>
+    </div>
+  </section>
+
+  <section class="fade-scale" aria-labelledby="fade-title">
+    <h2 id="fade-title">Del 0 al 8, como lo pidas</h2>
+    <ol class="guards" aria-label="Números de peine, del más corto al más largo">
+      <li>0</li><li>0,5</li><li>1</li><li>1,5</li><li>2</li><li>3</li><li>4</li><li>6</li><li>8</li>
+    </ol>
+  </section>
+
+  <section id="servicios" class="services" aria-labelledby="servicios-title">
+    <h2 id="servicios-title">Elegí qué te hacés</h2>
+    <ul class="ticket-list" data-services></ul>
+    <p class="services-note" data-deposit-note></p>
+  </section>
+
+  <section id="equipo" class="team" aria-labelledby="equipo-title">
+    <h2 id="equipo-title">Quién te atiende</h2>
+    <ul class="team-list" data-barbers></ul>
+  </section>
+
+  <section id="horarios" class="hours" aria-labelledby="horarios-title">
+    <h2 id="horarios-title">Cuándo abrimos</h2>
+    <p class="hours-big"><span data-hours-days>Lunes a sábado</span><br><span data-hours-range>10 a 20 h</span></p>
+    <p class="hours-extra" data-contact></p>
+  </section>
+</main>
+
+<footer class="foot">
+  <p><span data-site-name>New Style</span></p>
+  <p><a href="agenda">Agenda del dueño</a></p>
+</footer>
+
+<dialog class="booking" id="booking" aria-labelledby="booking-label">
+  <div class="booking-bar">
+    <span id="booking-label">Sacá tu número</span>
+    <button class="close" type="button" id="booking-close" aria-label="Cerrar reserva">×</button>
+  </div>
+  <div class="booking-body" id="booking-body"></div>
+</dialog>
+</body>
+</html>
