@@ -232,7 +232,7 @@
   /* Agenda del dueño (página /agenda). Marcado genérico con clases ag-*; cada
    * diseño la viste con su CSS. */
   function mountAgenda(root) {
-    let scope = 'upcoming', appointments = [], error = '', email = '', confirmCancel = null, services = new Map();
+    let scope = 'upcoming', appointments = [], error = '', email = '', confirmCancel = null, services = new Map(), barbers = new Map();
     const STATUS = { confirmed: 'Confirmado', pending: 'Seña pendiente', cancelled: 'Cancelado', expired: 'Vencido' };
     const set = html => { root.innerHTML = html; };
 
@@ -257,13 +257,17 @@
         <p class="ag-error" role="alert" ${error ? '' : 'hidden'}>${esc(error)}</p>
         ${groups.size ? [...groups].map(([date, items]) => `<section class="ag-day"><h2>${esc(dateLabel(date))}</h2><ul class="ag-list">${items.map(item => `
           <li class="ag-item ag-${esc(item.status)}"><span class="ag-time">${esc(item.time)}</span><span class="ag-who"><strong>${esc(item.name)}</strong><span>${esc(item.phone)}${item.email ? ' · ' + esc(item.email) : ''}</span></span>
-          <span class="ag-what">${esc(services.get(item.serviceId) || 'Turno')} · ${esc(item.duration)} min · ${money(item.amount)} ${item.paymentMode === 'deposit' ? 'de seña' : 'pagado'}</span><span class="ag-status">${STATUS[item.status] || ''}</span>
+          <span class="ag-what">${esc(services.get(item.serviceId) || 'Turno')}${barbers.has(item.barberId) ? ` con ${esc(barbers.get(item.barberId))}` : ''} · ${esc(item.duration)} min · ${money(item.amount)} ${item.paymentMode === 'deposit' ? 'de seña' : 'pagado'}</span><span class="ag-status">${STATUS[item.status] || ''}</span>
           <span class="ag-actions">${item.status === 'pending' ? `<button class="ag-button" data-ag="confirm" data-id="${esc(item.id)}">Confirmar seña</button>` : ''}${['pending', 'confirmed'].includes(item.status) ? (confirmCancel === item.id ? `<button class="ag-button ag-danger" data-ag="cancel" data-id="${esc(item.id)}">Sí, cancelar</button><button class="ag-button" data-ag="keep">No</button>` : `<button class="ag-button" data-ag="ask-cancel" data-id="${esc(item.id)}">Cancelar</button>`) : ''}</span></li>`).join('')}</ul></section>`).join('') : '<p class="ag-empty">No hay turnos para mostrar. Cuando alguien reserve, aparece acá.</p>'}`);
     }
 
     async function load() {
       if (!services.size) {
-        try { services = new Map((await loadSite()).services.map(item => [item.id, item.short || item.name])); } catch (_) { /* sin nombres de servicio */ }
+        try {
+          const site = await loadSite();
+          services = new Map(site.services.map(item => [item.id, item.short || item.name]));
+          barbers = new Map(site.barbers.map(item => [item.id, item.name]));
+        } catch (_) { /* sin nombres de servicio ni de equipo */ }
       }
       try {
         appointments = (await request(`/api/admin/appointments?scope=${scope}`)).appointments;
